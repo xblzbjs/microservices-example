@@ -54,7 +54,9 @@ class TestUserService(BaseTestCase):
             self.assertIn('fail', data['status'])
 
     def test_add_user_invalid_json_keys(self):
-        """Ensure error is thrown if the JSON object does not have a username key"""
+        """
+        Ensure error is thrown if the JSON object does not have a username key
+        """
         with self.client:
             response = self.client.post(
                 '/users',
@@ -120,20 +122,28 @@ class TestUserService(BaseTestCase):
             self.assertEqual(response.status_code, 200)
             self.assertEqual(len(data['data']['users']), 2)
             self.assertIn('michael', data['data']['users'][0]['username'])
-            self.assertIn('michael@mherman.org', data['data']['users'][0]['email'])
+            self.assertIn(
+                'michael@mherman.org', data['data']['users'][0]['email']
+            )
             self.assertIn('xblzbjs', data['data']['users'][1]['username'])
             self.assertIn('xblzbjs@man.org', data['data']['users'][1]['email'])
             self.assertIn('success', data['status'])
 
     def test_main_no_users(self):
-        """Ensure the main route behaves correctly when no users have been added to the database"""
+        """
+        Ensure the main route behaves correctly
+        when no users have been added to the database
+        """
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'<h1>All Users</h1>', response.data)
         self.assertIn(b'<p>No users!</p>', response.data)
 
     def test_main_with_users(self):
-        """Ensure the main route behaves correctly when users have been added to the database"""
+        """
+        Ensure the main route behaves correctly
+        when users have been added to the database
+        """
         with self.client:
             response = self.client.post(
                 '/',

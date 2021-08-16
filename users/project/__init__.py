@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, jsonify
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 # instantiate the db
@@ -12,7 +12,7 @@ def create_app(script_info=None):
     app = Flask(__name__)
 
     # set config
-    app_settings = os.getenv('APP_SETTINGS')
+    app.settings = os.getenv('APP_SETTINGS')
     app.config.from_object('project.config.DevelopmentConfig')
 
     # instantiate the db
@@ -25,5 +25,3 @@ def create_app(script_info=None):
     # shell context for flask cli
     app.shell_context_processor({'app': app, 'db': db})
     return app
-
-
