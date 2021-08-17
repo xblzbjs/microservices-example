@@ -17,3 +17,4 @@ pycodestyle==2.7.0
 pyflakes==2.3.1
 SQLAlchemy==1.4.22
 Werkzeug==2.0.1
+flask-cors==3.0.10

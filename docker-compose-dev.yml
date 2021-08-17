@@ -7,8 +7,6 @@ services:
     build:
       context: ./services/users
       dockerfile: Dockerfile-dev
-    volumes:
-      - './services/users:/usr/src/app'
     ports:
       - "5001:5000"
     environment:
@@ -32,14 +30,3 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-
-  nginx:
-    container_name: nginx
-    build:
-      context: ./services/nginx
-      dockerfile: Dockerfile
-    restart: always
-    ports:
-      - "80:80"
-    depends_on:
-      - users
